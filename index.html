@@ -1,0 +1,30 @@
+@'
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Prisijungimas</title>
+</head>
+<body>
+    <h1>Prisijungti prie MetaMask</h1>
+    <button onclick="connectWallet()">Prisijungti</button>
+
+    <script>
+        async function connectWallet() {
+            if (typeof window.ethereum === "undefined") {
+                alert("MetaMask nėra įdiegtas! Įdiek plėtinį ir bandyk dar kartą.");
+                return;
+            }
+
+            try {
+                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                alert("Prisijungta prie: " + accounts[0]);
+            } catch (error) {
+                alert("Prisijungimo klaida: " + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
+'@ | Out-File -Encoding utf8 index.html; Start-Process index.html
